@@ -130,3 +130,24 @@ rec.show()
     ###[ Padding ]###
                 load= '\x00\x00\x00\x00\x00\x00'
 ```
+
+---
+
+## What about sniff and dissect
+
+--
+
+```python
+def arp_monitor_callback(pkt):
+    # Dissect
+    if ARP in pkt and pkt[ARP].op in (1,2): #who-has or is-at
+        return print(f"{pkt[ARP].hwsrc} {pkt[ARP].psrc}")
+
+# And sniff
+sniff(prn=arp_monitor_callback, filter="arp", store=0)
+```
+
+```python
+00:0c:29:ff:ff:ff 192.168.177.131
+00:50:56:ff:ff:ff 192.168.177.2
+```
