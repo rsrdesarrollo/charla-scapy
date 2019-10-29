@@ -1,49 +1,177 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/night.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
 
-		<script src="js/reveal.js"></script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+    <style>
+        .reveal .second {
+            color: #FFD43B;
+        }
+
+        .reveal .third {
+            color: #306998;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2 class="second">Aprende redes</h2>
+                <h1 class="third">con</h1>
+                <img src="img/python.logo.png" style="height: 320px">
+            </section>
+            <section>
+                <h3>
+                    What's Scapy
+                </h3>
+                <p>
+                    <q cite="https://scapy.readthedocs.io/en/latest/introduction.html#about-scapy">
+                        Is a <strong class="second">Python program</strong> that enables the user to <strong
+                            class="second">send</strong>,
+                        <strong class="second">sniff</strong> and <strong class="second">dissect</strong> and
+                        <strong class="second">forge network packets</strong>.
+                    </q>
+                </p>
+                <p>
+                    <q cite="https://scapy.readthedocs.io/en/latest/introduction.html#about-scapy">
+                        In other words, is a <strong class="second">powerful</strong> interactive packet manipulation
+                        program.
+                    </q>
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h3>Let's forge some packets</h3>
+                </section>
+                <section>
+                    <img src="img/wireshark_layers_icmp.png">
+                </section>
+                <section>
+                    <h3>Show me the code</h3>
+                    <pre><code class="python" data-line-numbers="">pkg = IP(dst="8.8.8.8")/ICMP(type=8)/"Payload Data"
+pkg.show()
+                    </code></pre>
+                    <pre><code class="python" data-line-numbers="">###[ IP ]### 
+    version= 4
+    ihl= None
+    tos= 0x0
+    len= None
+    id= 1
+    flags= 
+    frag= 0
+    ttl= 64
+    proto= icmp
+    chksum= None
+    src= 192.168.177.131
+    dst= 8.8.8.8
+    \options\
+    ###[ ICMP ]### 
+        type= echo-request
+        code= 0
+        chksum= None
+        id= 0x0
+        seq= 0x0
+        ###[ Raw ]### 
+            load= 'Payload Data'
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Let's send some packets</h3>
+                    <script id="asciicast-239367" src="https://asciinema.org/a/239367.js" async></script>
+                </section>
+                <section>
+                    <h3>Some types of send</h3>
+                    <h4 class="second">By layer</h4>
+                    <ul>
+                        <li><strong>Send in layer 3:</strong> send, sr, sr1, srloop...</li>
+                        <li><strong>Send<span class="second">p</span> in layer 2:</strong> sendp, srp, srp1, srploop...
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Some types of send</h3>
+                    <h4 class="second">By behavior</h4>
+                    <ul>
+                        <li><strong>Just send some packages:</strong> send, sendp...</li>
+                        <li><strong>Send some receive some:</strong> sr srp, srloop, srploop...</li>
+                        <li><strong>Send some receive first:</strong> sr1, srp1...</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Now, show me the code</h3>
+                    <pre><code class="python" data-line-numbers="">pkg = IP(dst="8.8.8.8")/ICMP(type=8)/"Payload Data"
+rec = sr1(pkg)
+rec.show()
+                    </code></pre>
+                    <pre><code class="python">###[ IP ]### 
+    version= 4
+    ihl= 5
+    tos= 0x0
+    len= 40
+    id= 25657
+    flags= 
+    frag= 0
+    ttl= 128
+    proto= icmp
+    chksum= 0x5460
+    src= 8.8.8.8
+    dst= 192.168.177.131
+    \options\
+    ###[ ICMP ]### 
+        type= echo-reply
+        code= 0
+        chksum= 0xa9ed
+        id= 0x0
+        seq= 0x0
+    ###[ Raw ]### 
+            load= 'Payload Data'
+    ###[ Padding ]### 
+                load= '\x00\x00\x00\x00\x00\x00'</code></pre>
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            dependencies: [
+                { src: 'plugin/markdown/marked.js' },
+                { src: 'plugin/markdown/markdown.js' },
+                { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true }
+            ]
+        });
+    </script>
+</body>
+
 </html>
