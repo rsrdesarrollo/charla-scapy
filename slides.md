@@ -198,3 +198,22 @@ sniff(prn=arp_monitor_callback, filter="arp", store=0)
 ## DEMO 3
 
 [Pinecone - recon module](https://github.com/pinecone-wifi/pinecone/blob/master/modules/discovery/recon/recon.py#L91)
+
+---
+
+<!-- .slide: style="text-align: left;" -->
+
+### Other things
+
+#### Talk Evaluation!!
+https://bit.ly/2CFJP4S
+
+### We are hiring
+https://tarlogic.talentclue.com/co/tarlogic
+
+#### I have some merchandising stuff 😀 🖊🗒
+
+---
+
+## That's all, thanks!
+### **Any questions?**
