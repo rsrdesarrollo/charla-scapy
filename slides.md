@@ -13,13 +13,15 @@ logoImg: false
 
 # with
 
-![Python](/img/python.logo.png =350x)
+![Python](/img/python.logo.png =250x)
 
 ---
 
 <!-- .slide: style="text-align: left;" -->
 
-### What's Scapy
+### What's Scapy 
+
+![Scapy](img/scapy.logo.png =200x)
 
 _"Is a **Python program** that enables the user to **send**, **sniff**, **dissect**  and **forge network packets**"_
 
@@ -30,6 +32,8 @@ _"In other words, is a **powerful** interactive packet manipulation program"_
 ## Let's forge some packets
 
 --
+
+### Do you Remember OSI?
 
 ![alt](img/wireshark_layers_icmp.png)
 
@@ -96,7 +100,7 @@ pkg.show()
 
 --
 
-### Now, show me the code
+### Now, show the code
 
 ```python
 pkg = IP(dst="8.8.8.8")/ICMP(type=8)/"Payload Data"
@@ -151,3 +155,46 @@ sniff(prn=arp_monitor_callback, filter="arp", store=0)
 00:0c:29:ff:ff:ff 192.168.177.131
 00:50:56:ff:ff:ff 192.168.177.2
 ```
+
+--
+
+#### Little break for some code reading
+
+* [sendp - write packages at layer 2](https://github.com/secdev/scapy/blob/master/scapy/sendrecv.py#L338)
+* [sniff and AsyncSniffer - for package reading from interface](https://github.com/secdev/scapy/blob/43fda76e560e3c94ab64fc23f8ee29c582b459be/scapy/sendrecv.py#L1021)
+
+---
+
+#### Did you said powerful???
+
+![sounds good to me](/img/gif/sounds_good_to_me.gif =x500)
+
+--
+
+`ping -c1 8.8.8.8`
+
+`tcpdump arp`
+
+---
+
+## DEMO 1
+
+--
+
+![cat board](/img/gif/cat_board.gif =x800)
+
+---
+
+## DEMO 2
+
+[Pinecone - deauth module](https://github.com/pinecone-wifi/pinecone/blob/master/modules/attack/deauth/deauth.py#L72)
+
+--
+
+![elmo](img/gif/elmo.webp)
+
+---
+
+## DEMO 3
+
+[Pinecone - recon module](https://github.com/pinecone-wifi/pinecone/blob/master/modules/discovery/recon/recon.py#L91)
