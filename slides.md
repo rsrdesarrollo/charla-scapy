@@ -35,7 +35,7 @@ _"In other words, is a **powerful** interactive packet manipulation program"_
 
 ### Do you Remember OSI?
 
-![alt](img/wireshark_layers_icmp.png)
+![wireshark osi](img/wireshark_layers_icmp.png)
 
 --
 
